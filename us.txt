@@ -2,3 +2,4 @@
 2. Jako gracz, chcę zobaczyć zainincjowaną planszę z ustawionymi bierkami.
 3. Jako gracz, chcę przestawić bierkę na inne puste pole (bicia lub 
     "postawienie na własną bierkę", jest traktowane jako błąd).
+4. Chcę wykonywać ruchy naprzemiennie (nie są sprawdzane reguły bierek i nie są dozwolone bicia)

@@ -54,8 +54,8 @@ class Chessboard:
         if to_field is None and from_field is not None:
             self._fields[to_row][to_col] = from_field
             self._fields[from_row][from_col] = None
-            return True
-        return False
+        else:
+            raise ValueError("Invalid move!")
 
 if __name__ == '__main__':
     # US1
