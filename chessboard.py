@@ -2,6 +2,7 @@
 """Moduł obsługujący szachownicę do gry w tradycyjne szachy"""
 
 from piece import Piece
+from position import Position
 
 class Chessboard:
     def __init__(self):
@@ -44,12 +45,32 @@ class Chessboard:
             print('|', rpr, sep='', end='')
         print('|', row)
 
+    def move(self, position_from, position_to):
+        """Przesuwa pionek na polach"""
+        from_col, from_row = position_from.get_coordinates()
+        to_col, to_row = position_to.get_coordinates()
+        from_field = self._fields[from_row][from_col]
+        to_field = self._fields[to_row][to_col]
+        if to_field is None and from_field is not None:
+            self._fields[to_row][to_col] = from_field
+            self._fields[from_row][from_col] = None
+            return True
+        return False
+
 if __name__ == '__main__':
     # US1
     chessboard = Chessboard()
     chessboard.draw()
     # US2
     chessboard.init()
+    chessboard.draw()
+    # US3
+    from_position = Position('e', 2)
+    to_position = Position('e', 4)
+    if chessboard.move(from_position, to_position):
+        print("Move SUCCESS!")
+    else:
+        print("Move FAIL!!")
     chessboard.draw()
 
 
