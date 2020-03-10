@@ -1,0 +1,4 @@
+1. Jako gracz, chcę zobaczyć pustą planszę do gry w szachy.
+2. Jako gracz, chcę zobaczyć zainincjowaną planszę z ustawionymi bierkami.
+3. Jako gracz, chcę przestawić bierkę na inne puste pole (bicia lub 
+    "postawienie na własną bierkę", jest traktowane jako błąd).
