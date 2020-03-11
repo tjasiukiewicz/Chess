@@ -1,0 +1,11 @@
+>>> class Child(Borg):
+...     pass
+... 
+>>> b1 = Borg()
+>>> b2 = Borg()
+>>> b1 is b2
+False
+>>> c1 = Child()
+>>> b1.one_var = "data"
+>>> c1.one_var
+'data'

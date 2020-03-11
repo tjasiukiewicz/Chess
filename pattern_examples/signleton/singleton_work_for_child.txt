@@ -1,0 +1,7 @@
+>>> class Child(Singleton):
+...     pass
+... 
+>>> ch1 = Child()
+>>> s1 = Singleton()
+>>> ch1 is s1
+False

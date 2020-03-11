@@ -1,0 +1,4 @@
+>>> s1 = gofsingleton.Singleton()
+>>> s2 = gofsingleton.Singleton()
+>>> s1 is s2
+True
