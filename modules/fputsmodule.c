@@ -9,12 +9,10 @@ static PyObject *method_fputs(PyObject *self, PyObject *args) {
         return NULL;
     }
 
-    /* Definicja wyjątku...
     if (strlen(str) < 10) {
         PyErr_SetString(PyExc_ValueError, "Ciąg znaków powinien być dłuższy od 10");
         return NULL;
     }
-    */
 
     FILE *fp = fopen(filename, "w");
     bytes_copied = fputs(str, fp);
@@ -38,14 +36,15 @@ static struct PyModuleDef fputsmodule = {
 };
 
 PyMODINIT_FUNC PyInit_fputs(void) {
-    return PyModule_Create(&fputsmodule);
 
     /* Stała dostępna przez nazwę */
-    //PyModule_AddIntConstant(module, "FPUTS_FLAG", 64);
+    //PyModule_AddIntConstant(&fputsmodule, "FPUTS_FLAG", 64);
 
     /* Stała dostępna przez makro */
     //#define FPUTS_MACRO 256
 
     /* Dodanie makra do modułu */
-    //PyModule_AddIntMacro(module, FPUTS_MACRO);
+    //PyModule_AddIntMacro(&fputsmodule, FPUTS_MACRO);
+
+    return PyModule_Create(&fputsmodule);
 }
