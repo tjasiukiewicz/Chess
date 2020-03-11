@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Moduł obsługujący szachownicę do gry w tradycyjne szachy"""
 
-from piece import Piece, Pawn, Rook, Knight, Bishop, Queen, King
+from piece import *
 from position import Position
 from color import Color
+from console import Console
+from console import piece_to_value
 
 class Chessboard:
     def __init__(self):
@@ -19,32 +21,6 @@ class Chessboard:
         for col, piece in zip('abcdefgh', (Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook)):
             self._fields[1][col] = piece(Color.White)
             self._fields[8][col] = piece(Color.Black)
-
-    def draw(self):
-        """Wyświetla szachownicę"""
-        self._show_column_names()
-        for row in range(8, 0, -1):
-            self._show_row_separator()
-            self._show_row(row)
-        self._show_row_separator()
-        self._show_column_names()
-
-    def _show_column_names(self):
-        """Wyświetla nazwy kolumn"""
-        print("   a b c d e f g h")
-
-    def _show_row_separator(self):
-        """Wyświetla separator wierszy"""
-        print("  ", "+-" * 8, '+', sep='')
-
-    def _show_row(self, row):
-        """Wyświetla pełen wiersz z figurami"""
-        print(row, end=' ')
-        for col in 'abcdefgh':
-            field = self._fields[row][col]
-            rpr = ' ' if field == None else field.get_repr()
-            print('|', rpr, sep='', end='')
-        print('|', row)
 
     def move(self, position_from, position_to):
         """Przesuwa pionek na polach"""
@@ -63,20 +39,28 @@ class Chessboard:
         col, row = position.get_coordinates()
         return self._fields[row][col]
 
+    def accept(self, console):
+        """Zasila danymi wizytator console"""
+        data = []
+        for row in range(8, 0, -1):
+            row_data = []
+            data.append(row_data)
+            for col in "abcdefgh":
+                field = self._fields[row][col]
+                value = 0
+                if field != None:
+                    value = piece_to_value[self._fields[row][col].__class__]
+                    value += 0 if self._fields[row][col].get_color() == Color.White else 100
+                row_data.append(value)
+        console.visit(data)
+
 if __name__ == '__main__':
-    # US1
     chessboard = Chessboard()
-    chessboard.draw()
-    # US2
+    console = Console()
+    chessboard.accept(console)
+    console.draw()
     chessboard.init()
-    chessboard.draw()
-    # US3
-    from_position = Position('e', 2)
-    to_position = Position('e', 4)
-    if chessboard.move(from_position, to_position):
-        print("Move SUCCESS!")
-    else:
-        print("Move FAIL!!")
-    chessboard.draw()
+    chessboard.accept(console)
+    console.draw()
 
 
