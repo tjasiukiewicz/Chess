@@ -9,7 +9,14 @@ class Position:
         self._row = row
 
     def get_coordinates(self):
+        """Zwraca koordynaty z pozycji"""
         return self._name, self._row
+
+    def __sub__(self, other_position):
+        """Zwraca tuplę w postacji delty z pozycji bieżącej i przekazanej"""
+        my_col, my_row = self.get_coordinates()
+        other_col, other_row = other_position.get_coordinates()
+        return ord(my_col) - ord(other_col), my_row - other_row
 
 if __name__ == '__main__':
     position = Position('a', 2)
@@ -17,4 +24,6 @@ if __name__ == '__main__':
         position = Position('z', 9)
     except ValueError as e:
         print(e)
+
+    print(Position('a', 1) - Position('b', 2))
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Moduł obsługujący szachownicę do gry w tradycyjne szachy"""
 
-from piece import Piece
+from piece import Piece, Pawn, Rook, Knight, Bishop, Queen, King
 from position import Position
 from color import Color
 
@@ -14,11 +14,11 @@ class Chessboard:
     def init(self):
         """Ustawia figury w początkowym stanie"""
         for col in "abcdefgh":
-            self._fields[7][col] = Piece('p', Color.Black)
-            self._fields[2][col] = Piece('p', Color.White)
-        for col, name in zip('abcdefgh', 'rnbqkbnr'):
-            self._fields[1][col] = Piece(name, Color.White)
-            self._fields[8][col] = Piece(name, Color.Black)
+            self._fields[7][col] = Pawn(Color.Black)
+            self._fields[2][col] = Pawn(Color.White)
+        for col, piece in zip('abcdefgh', (Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook)):
+            self._fields[1][col] = piece(Color.White)
+            self._fields[8][col] = piece(Color.Black)
 
     def draw(self):
         """Wyświetla szachownicę"""
@@ -57,6 +57,11 @@ class Chessboard:
             self._fields[from_row][from_col] = None
         else:
             raise ValueError("Invalid move!")
+
+    def get_piece(self, position):
+        """Zwraca pionek na danej pozycji"""
+        col, row = position.get_coordinates()
+        return self._fields[row][col]
 
 if __name__ == '__main__':
     # US1

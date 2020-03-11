@@ -3,6 +3,7 @@
 from player import Player
 from chessboard import Chessboard
 from color import Color
+from piece import *
 
 class Game:
     def __init__(self):
@@ -18,7 +19,13 @@ class Game:
         while True:
             try:
                 position_from, position_to = self._current_player.get_move()
-                self._board.move(position_from, position_to)
+                piece = self._board.get_piece(position_from)
+                if (piece.is_move_possible(position_from, position_to)
+                        and piece.get_color() == self._current_player.get_color()):
+                    self._board.move(position_from, position_to)
+                else:
+                    print("Move not possible! Try again")
+                    continue
             except ValueError as e:
                 print(e)
             else:
