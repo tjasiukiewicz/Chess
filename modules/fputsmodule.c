@@ -36,15 +36,18 @@ static struct PyModuleDef fputsmodule = {
 };
 
 PyMODINIT_FUNC PyInit_fputs(void) {
+    /* Rejestrowanie modułu */
+    PyObject *module = PyModule_Create(&fputsmodule);
 
     /* Stała dostępna przez nazwę */
-    //PyModule_AddIntConstant(&fputsmodule, "FPUTS_FLAG", 64);
+    PyModule_AddIntConstant(module, "FPUTS_FLAG", 64);
 
     /* Stała dostępna przez makro */
-    //#define FPUTS_MACRO 256
+    #define FPUTS_MACRO 256
 
     /* Dodanie makra do modułu */
-    //PyModule_AddIntMacro(&fputsmodule, FPUTS_MACRO);
+    PyModule_AddIntMacro(module, FPUTS_MACRO);
 
-    return PyModule_Create(&fputsmodule);
+    //return PyModule_Create(module);
+    return module;
 }
