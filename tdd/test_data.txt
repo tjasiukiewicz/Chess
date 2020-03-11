@@ -1,0 +1,26 @@
+To są testy do funkcji caclualte(..)
+====================================
+
+Użycie calculate(a, b) -> zwraca sumę a i b
+-------------------------------------------
+
+Wczytanie modułu wraz z funkcją calculate.
+
+    >>> from simple_doctest import calculate
+
+Proste dodawanie
+
+    >>> calculate(1, 1)
+    2
+
+Tak, tu ma być 5 :-)
+
+    >>> calculate(2, 2)
+    5
+    >>> data = [ calculate(v, v * 2) for v in range(5) ]
+    >>> data
+    [0, 3, 6, 9, 12]
+    >>> calculate(3, 3)
+    Traceback (most recent call last):
+    ...
+    Exception: Durny błąd

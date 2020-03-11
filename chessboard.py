@@ -3,6 +3,7 @@
 
 from piece import Piece
 from position import Position
+from color import Color
 
 class Chessboard:
     def __init__(self):
@@ -13,11 +14,11 @@ class Chessboard:
     def init(self):
         """Ustawia figury w początkowym stanie"""
         for col in "abcdefgh":
-            self._fields[7][col] = Piece('p')
-            self._fields[2][col] = Piece('P')
+            self._fields[7][col] = Piece('p', Color.Black)
+            self._fields[2][col] = Piece('p', Color.White)
         for col, name in zip('abcdefgh', 'rnbqkbnr'):
-            self._fields[1][col] = Piece(name.upper())
-            self._fields[8][col] = Piece(name)
+            self._fields[1][col] = Piece(name, Color.White)
+            self._fields[8][col] = Piece(name, Color.Black)
 
     def draw(self):
         """Wyświetla szachownicę"""
