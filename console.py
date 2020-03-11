@@ -32,11 +32,11 @@ class Console:
 
     def _show_row(self, row):
         """Wyświetla pełen wiersz z figurami"""
-        print(row + 1, end=' ')
+        print(8 - row, end=' ')
         for col in range(8):
             value = self._data[row][col]
             rpr = number_to_char[value if value < 100 else value - 100]
             if value < 100:
                 rpr = rpr.upper()
             print('|', rpr, sep='', end='')
-        print('|', row + 1)
+        print('|', 8 - row)
