@@ -11,19 +11,17 @@ class Game:
     def __init__(self, console = Console()):
         """Inicjalizacja gry"""
         self._console = console
-        self._board = Chessboard()
-        self._board.init()
+        self._board = Chessboard(self._console, self._console.draw)
         self._current_player, self._next_player = PlayerMaker(self._console).make()
 
     def run(self):
         """Pętla główna gry"""
-        self._board.accept(self._console)
-        self._console.draw()
+        self._board.init()
         while True:
             try:
                 position_from, position_to = self._current_player.get_move()
                 piece = self._board.get_piece(position_from)
-                if (piece.is_move_possible(position_from, position_to)
+                if (piece is not None and piece.is_move_possible(position_from, position_to)
                         and piece.get_color() == self._current_player.get_color()):
                     self._board.move(position_from, position_to)
                 else:
@@ -33,8 +31,6 @@ class Game:
                 print(e)
             else:
                 self._current_player, self._next_player = self._next_player, self._current_player
-                self._board.accept(self._console)
-                self._console.draw()
 
 if __name__ == '__main__':
     game = Game(Console())

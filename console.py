@@ -3,8 +3,6 @@
 from piece import *
 from color import Color
 
-piece_to_value = { Pawn: 1, Rook: 2, Knight: 3, Bishop: 4, Queen: 5, King: 6 }
-
 number_to_char = { 0: ' ', 1: 'p', 2: 'r', 3: 'n', 4: 'b', 5: 'q', 6: 'k' }
 
 color_to_name = {Color.White: "WHITE", Color.Black: "BLACK"}
