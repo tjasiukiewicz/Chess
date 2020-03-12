@@ -11,9 +11,11 @@ color_to_name = {Color.White: "WHITE", Color.Black: "BLACK"}
 
 class Console:
     def __init__(self):
+        """Przygotowuje pole z danymi szachownicy"""
         self._data = []
 
     def visit(self, values):
+        """Wizytator dla szachownicy"""
         self._data = values
 
     def draw(self):
@@ -26,11 +28,36 @@ class Console:
         self._show_column_names()
 
     def illegal_move_error(self):
+        """Wyświetla błąd ruchu"""
         print("Illegal move error! Try again.")
+
+    def input_error(self):
+        """Wyświetla błąd wprowadzania danych"""
+        print("Input Error! Try again!")
 
     def show_player_info(self, name, color):
         """Wyświetla informację na temat gracza"""
         print("Player: %s, plays: %s" % (name, color_to_name[color]), end='')
+
+    def input_player_name(self, num):
+        """Wprowadza nazwę gracza"""
+        return input("Player" + str(num) + " input name: ")
+
+    def input_color(self, num):
+        """Zwraca poprawny kolor z konsoli"""
+        color = ""
+        while True:
+            color = input("Player" + str(num) + " input color [white|black]: ")
+            color = color.lower()
+            if color == 'white':
+                color = Color.White
+            elif color == 'black':
+                color = Color.Black
+            else:
+                self.input_error()
+                continue
+            break
+        return color
 
     def input_move(self):
         """Wprowadza ruch z konsoli"""

@@ -5,15 +5,15 @@ from chessboard import Chessboard
 from color import Color
 from piece import *
 from console import Console
+from player_maker import PlayerMaker
 
 class Game:
-    def __init__(self):
+    def __init__(self, console = Console()):
         """Inicjalizacja gry"""
-        self._current_player = Player("Adam", Color.White)
-        self._next_player = Player("Eve", Color.Black)
-        self._console = Console()
+        self._console = console
         self._board = Chessboard()
         self._board.init()
+        self._current_player, self._next_player = PlayerMaker(self._console).make()
 
     def run(self):
         """Pętla główna gry"""
@@ -28,7 +28,6 @@ class Game:
                     self._board.move(position_from, position_to)
                 else:
                     self._console.illegal_move_error()
-                    #print("Move not possible! Try again")
                     continue
             except ValueError as e:
                 print(e)
@@ -38,5 +37,5 @@ class Game:
                 self._console.draw()
 
 if __name__ == '__main__':
-    game = Game()
+    game = Game(Console())
     game.run()
