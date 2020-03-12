@@ -27,7 +27,8 @@ class Game:
                         and piece.get_color() == self._current_player.get_color()):
                     self._board.move(position_from, position_to)
                 else:
-                    print("Move not possible! Try again")
+                    self._console.illegal_move_error()
+                    #print("Move not possible! Try again")
                     continue
             except ValueError as e:
                 print(e)

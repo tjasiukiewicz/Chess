@@ -41,18 +41,18 @@ class Chessboard:
 
     def accept(self, console):
         """Zasila danymi wizytator console"""
-        data = []
-        for row in range(8, 0, -1):
-            row_data = []
-            data.append(row_data)
-            for col in "abcdefgh":
-                field = self._fields[row][col]
-                value = 0
-                if field != None:
-                    value = piece_to_value[self._fields[row][col].__class__]
-                    value += 0 if self._fields[row][col].get_color() == Color.White else 100
-                row_data.append(value)
+        data = [[self._transform(row, col) for col in "abcdefgh"] for row in range(8, 0, -1)]
         console.visit(data)
+
+    def _transform(self, row, col):
+        field = self._fields[row][col]
+        value = 0
+        if field != None:
+            #value = piece_to_value[self._fields[row][col].__class__]
+            value = piece_to_value[field.__class__]
+            value += 0 if self._fields[row][col].get_color() == Color.White else 100
+        return value
+
 
 if __name__ == '__main__':
     chessboard = Chessboard()
