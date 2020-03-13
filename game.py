@@ -41,8 +41,8 @@ class Game:
                         self._move_count += 1
                         self.restore_state()
                         self._board_presentation()
-                        if self._move_count % 2:
-                            self._swap_players()
+                        #if not (self._move_count % 2):
+                        self._swap_players()
                     else:
                         self._console.show_is_not_next_move()
                 elif e.args[0] == 'p':
@@ -51,8 +51,8 @@ class Game:
                         self._move_count -= 1
                         self.restore_state()
                         self._board_presentation()
-                        if self._move_count % 2:
-                            self._swap_players()
+                        #if self._move_count % 2:
+                        self._swap_players()
                     else:
                         self._console.show_is_not_prev_move()
                 else:
