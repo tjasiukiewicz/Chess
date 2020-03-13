@@ -59,7 +59,18 @@ class Console:
 
     def input_move(self):
         """Wprowadza ruch z konsoli"""
-        return input(" move: ")
+        coords = input(" move: ")
+        if coords == 'n' or coords == 'p':
+            raise ValueError(coords)
+        return coords
+
+    def show_is_not_next_move(self):
+        """Pokazuje komunikat o braku następnego ruchu w historii"""
+        print("Sorry no next move in history!")
+
+    def show_is_not_prev_move(self):
+        """Pokazuje komunikat o braku poprzedniego ruchu w historii"""
+        print("Sorry no prev move in history!")
 
     def _show_column_names(self):
         """Wyświetla nazwy kolumn"""

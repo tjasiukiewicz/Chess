@@ -6,6 +6,7 @@ import time
 class Sailor:
     ROAD_WIDTH = 9
     position = ROAD_WIDTH // 2
+
     def __init__(self):
         self._end = threading.Event()
         self._position_lock = threading.Lock()
@@ -27,8 +28,8 @@ class Sailor:
         self._thrdToRight.start()
         self._position_lock.release()
         while not self._end.is_set():
+            time.sleep(.01)
             with self._position_lock:
-                time.sleep(.01)
                 self.show_road()
         self._thrdToLeft.join()
         self._thrdToRight.join()
