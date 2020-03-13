@@ -13,6 +13,8 @@ def main():
     thread1.start()
     time.sleep(10)
     myEvent.set()
+    # Mimo że nie ma tego co pod spodem, aplikacja skończy się prawidłowo
+    #thread1.join()
 
 
 if __name__ == '__main__':
